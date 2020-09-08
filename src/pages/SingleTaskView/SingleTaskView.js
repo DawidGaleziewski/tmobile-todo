@@ -25,7 +25,7 @@ import { Redirect } from "react-router-dom";
 import { tasksAPIUrl } from "../../auth/tasksAPISettings";
 
 const SingleTaskView = ({ match }) => {
-  const [taskData, setTaskData] = useState({});
+  const [taskData, setTaskData] = useState(null);
   const [isLoading, setIsloading] = useState(false);
   const [wasContentNotFound, setWasContentNotFound] = useState(false);
   const { removeTask } = useContext(TasksContext);
@@ -75,31 +75,35 @@ const SingleTaskView = ({ match }) => {
   const PageConditionalView = () => {
     if (shouldBeRedirected) {
       return <Redirect to="/" />;
-    } else if (isLoading) {
+    } 
+    
+    if (isLoading) {
       return <LoadingCircle />;
-    } else if (wasContentNotFound) {
+    } 
+    
+    if (wasContentNotFound) {
       return (
         <PageNotFoundView pageTitle={`Task with id #${id}, was not found`} />
       );
-    } else {
-      return (
-        <Dashboard>
-          <ToggleStatusBadge task={taskData} />
-          <SectionHeader text={`#${id} ${title}`} />
-          <TaskDescriptionPar>{description}</TaskDescriptionPar>
-          <DeleteButton
-            btnText="Delete task"
-            modalText={`Are you sure you want to delete task #${id}`}
-            id={id}
-            onTaskDeletionHandler={redirectBackToRoot}
-          />
-          <EditTaskFormButton
-            taskData={taskData}
-            onEditFormChangeHandler={onEditFormChangeHandler}
-          />
-        </Dashboard>
-      );
     }
+
+    return (
+      <Dashboard>
+        <ToggleStatusBadge task={taskData} />
+        <SectionHeader text={`#${id} ${title}`} />
+        <TaskDescriptionPar>{description}</TaskDescriptionPar>
+        <DeleteButton
+          btnText="Delete task"
+          modalText={`Are you sure you want to delete task #${id}`}
+          id={id}
+          onTaskDeletionHandler={redirectBackToRoot}
+        />
+        <EditTaskFormButton
+          taskData={taskData}
+          onEditFormChangeHandler={onEditFormChangeHandler}
+        />
+      </Dashboard>
+    );
   };
 
   return PageConditionalView();
