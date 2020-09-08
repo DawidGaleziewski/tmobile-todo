@@ -21,19 +21,19 @@ const LandingPageView = () => {
 
   return isServerUnreachable ? (
     <PageNotFoundView
-      pageTitle={"There were issues contacting server. Try again later"}
+      pageTitle="There were issues contacting server. Try again later"
     />
   ) : (
     <Dashbord>
-      <SectionHeader text={"Add task"} />
+      <SectionHeader text="Add task" />
       <AddTaskForm />{" "}
       <DoubleColumnGrid>
         <TasksListing
-          headerText={"Tasks in progress"}
+          headerText="Tasks in progress"
           tasks={getInProgressTasks(tasksState)}
         />{" "}
         <TasksListing
-          headerText={"Completed tasks"}
+          headerText="Completed tasks"
           tasks={getCompletedTasks(tasksState)}
         />
       </DoubleColumnGrid>
