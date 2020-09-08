@@ -14,12 +14,10 @@ const notFoundTextParStyle = css`
   font-size: 10rem;
 `;
 
-const PageNotFoundView = ({ pageTitle }) => {
-  return (
-    <Dashboard>
-      <SectionHeader text={pageTitle} />
-      <span css={notFoundTextParStyle}>Ups 404. Sorry</span>
-    </Dashboard>
-  );
-};
+const PageNotFoundView = ({ pageTitle }) => (
+  <Dashboard>
+    <SectionHeader text={pageTitle} />
+    <span css={notFoundTextParStyle}>Ups 404. Sorry</span>
+  </Dashboard>
+);
 export default PageNotFoundView;
