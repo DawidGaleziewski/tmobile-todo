@@ -44,16 +44,16 @@ const AddTaskForm = () => {
     setIsLoading(true);
     try {
       const { data } = await axios.post(tasksAPIUrl, formState, httpHeader);
-      setIsLoading(false);
       setTasksState([...tasksState, data]);
     } catch (error) {
-      setIsLoading(false);
       addAlert(
         "danger",
         "Ups. Unable to add task. Check data and try again",
         3000
       );
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const onSubmitHandler = (event) => {
@@ -89,18 +89,18 @@ const AddTaskForm = () => {
               onChange={onChangeHandler}
             />
             <InputSlider
-              id={"taskTitle"}
-              type={"text"}
-              name={"title"}
-              labelText={"task title"}
+              id="taskTitle"
+              type="text"
+              name="title"
+              labelText="task title"
               value={formState.title}
               onChange={onChangeHandler}
               required={true}
             />
             <InputSlider
-              id={"taskDescription"}
-              type={"text"}
-              name={"description"}
+              id="taskDescription"
+              type="text"
+              name="description"
               labelText={"task description"}
               value={formState.description}
               onChange={onChangeHandler}
